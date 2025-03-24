@@ -20,20 +20,17 @@ const addToFavorites = async ({ courseId }: { courseId: number }) => {
 
 const removeFromFavorites = async ({ courseId }: { courseId: number }) => {
   try {
-    const res = await fetch(
-      "https://pr-42389.masterclass.dev/jsonapi/v1/favorite",
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "",
-        },
-        body: JSON.stringify({
-          email: USER_EMAIL,
-          course_id: courseId,
-        }),
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorite`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "",
+      },
+      body: JSON.stringify({
+        email: USER_EMAIL,
+        course_id: courseId,
+      }),
+    });
     if (!res.ok) {
       const errorData = await res.json();
       throw new Error(errorData.message || "Failed to remove from favorites");
