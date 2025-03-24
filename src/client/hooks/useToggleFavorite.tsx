@@ -20,23 +20,15 @@ const addToFavorites = async ({ courseId }: { courseId: number }) => {
 
 const removeFromFavorites = async ({ courseId }: { courseId: number }) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorite`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "",
-      },
-      body: JSON.stringify({
+    const res = await axiosClient.delete("/favorite", {
+      data: {
         email: USER_EMAIL,
         course_id: courseId,
-      }),
+      },
     });
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Failed to remove from favorites");
-    }
+    return res.data;
   } catch (error) {
-    console.error("Error removing favorite:", error);
+    console.error("Error adding favorite:", error);
     throw error;
   }
 };
