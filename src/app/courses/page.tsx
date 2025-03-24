@@ -3,6 +3,7 @@
 import { useGetCourses } from "@/client/hooks/useGetCourses";
 
 import CourseCard from "@/app/courses/components/CourseCard";
+import CoursesList from "./components/CoursesList";
 
 export default function Courses() {
   const { data, isLoading, error } = useGetCourses();
@@ -15,11 +16,7 @@ export default function Courses() {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <ul className="flex flex-col gap-5">
-          {data?.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </ul>
+        data && <CoursesList courses={data} />
       )}
     </main>
   );

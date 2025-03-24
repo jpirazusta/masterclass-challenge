@@ -21,7 +21,7 @@ const CourseCard = ({
       <button
         onClick={handleFavoriteClick}
         aria-label="Toggle favorite"
-        className="text-left flex gap-3 w-full max-w-3xl cursor-pointer"
+        className="text-left flex gap-3 w-full cursor-pointer w-full"
         disabled={isPending}
       >
         <Image
