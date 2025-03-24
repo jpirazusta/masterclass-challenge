@@ -45,6 +45,7 @@ export default function CoursesList({ courses }: CoursesListProps) {
         {filteredCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
+        {/* TODO: Add empty state */}
       </ul>
     </>
   );
