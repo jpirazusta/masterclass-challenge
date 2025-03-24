@@ -16,31 +16,19 @@ const getButtonClasses = (active: boolean) =>
 
 interface CoursesListProps {
   courses: Course[];
+  showOnlyFavorites: boolean;
 }
 
-export default function CoursesList({ courses }: CoursesListProps) {
-  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
+export default function CoursesList({
+  courses,
+  showOnlyFavorites,
+}: CoursesListProps) {
   const filteredCourses = showOnlyFavorites
     ? courses.filter((course) => course.favorite)
     : courses;
 
   return (
     <>
-      <div className="flex gap-3">
-        {/* TODO: Create Button component with styling */}
-        <button
-          className={getButtonClasses(!showOnlyFavorites)}
-          onClick={() => setShowOnlyFavorites(false)}
-        >
-          Show All
-        </button>
-        <button
-          className={getButtonClasses(showOnlyFavorites)}
-          onClick={() => setShowOnlyFavorites(true)}
-        >
-          Show Only Favorites
-        </button>
-      </div>
       <ul className="flex flex-col gap-5 w-full max-w-3xl">
         {filteredCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
